@@ -6,6 +6,7 @@ const staticAssets = [
 	'./files/',
 	'./files/test.pdf',
 	'./files/Test231.pdf',
+	'./images/',
 	'./images/icon.png',
 	'./images/icon192.png',
 	'./js/',
@@ -20,7 +21,7 @@ self.addEventListener('install', async e => {
 });
 
 self.addEventListener('activate', async e => {
-	self.client.claim();
+	self.clients.claim();
 });
 
 self.addEventListener('fetch', async e => {
