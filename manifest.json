@@ -1,6 +1,6 @@
 {
-	"name": "PWA Test"
-	"short_name": "TEST"
+	"name": "PWA Test",
+	"short_name": "TEST",
 	"start_url": "https://gotex.github.io/PagesTest/",
 	"display": "standalone",
 	"background_color": "#fff",
