@@ -1,7 +1,7 @@
 {
 	"name": "PWA Test",
 	"short_name": "TEST",
-	"start_url": "https://gotex.github.io/PWATest/",
+	"start_url": "https://gotex.github.io/PWATest/index.html",
 	"display": "standalone",
 	"background_color": "#fff",
 	"description": "Documents zum sau schmeissen",
