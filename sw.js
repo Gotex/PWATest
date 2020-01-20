@@ -3,7 +3,7 @@ const staticAssets = [
 	'./',
 	'./index.html',
 	'./manifest.json',
-	'./sw.js'
+	'./sw.js',
 	'./files/',
 	'./files/test.pdf',
 	'./files/Test231.pdf',
