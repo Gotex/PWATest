@@ -2,10 +2,10 @@ const cacheName = 'pwa-v1';
 const staticAssets = [
 	'./',
 	'./index.html',
-	'./manifest.json',
-	'./sw.js',
-	'./files/test.pdf',
-	'./files/Test231.pdf',
+	//'./manifest.json',
+	//'./sw.js',
+	//'./files/test.pdf',
+	//'./files/Test231.pdf',
 	'./images/icon.png',
 	'./images/icon192.png',
 	'./js/index.js'
