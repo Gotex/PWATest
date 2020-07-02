@@ -1,51 +1,46 @@
-const cacheName = 'pwa-v2';
-const staticAssets = [
-	'./',
-	'./index.html',
-	//'./manifest.json',
-	//'./sw.js',
-	//'./files/test.pdf',
-	//'./files/Test231.pdf',
-	'./images/icon.png',
-	'./images/icon192.png',
-	'./js/index.js'
+const CACHE_NAME = 'static-cache-v1';
+const FILES_TO_CACHE = [
+  './index.html',
+  './offline.html'
 ];
 
-self.addEventListener('install', async e => {
-	const cache = await caches.open(cacheName);
-	await cache.addAll(staticAssets);
-	return self.skipWaiting();
+self.addEventListener('install', function(event) {
+// Precache static resources here.
+event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('[ServiceWorker] Pre-caching offline page');
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
 });
 
-self.addEventListener('activate', async e => {
-	self.clients.claim();
+self.addEventListener('activate', function(event) {
+  // Remove previous cached data from disk.
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== CACHE_NAME) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
 });
 
-self.addEventListener('fetch', async e => {
-	const req = e.request;
-	const url = new URL(req.url);
-	
-	if(url.origin === location.origin) {
-		e.respondWith(cacheFirst(req));
-	} else {
-		e.respondWith(networkAndCache(req));
-	}
+self.addEventListener('fetch', function(event) {
+  // Add fetch event handler here.
+  if (event.request.mode !== 'navigate') {
+    // Not a page navigation, bail.
+    return;
+  }
+  event.respondWith(
+      fetch(event.request)
+          .catch(() => {
+            return caches.open(CACHE_NAME)
+                .then((cache) => {
+                  return cache.match('offline.html');
+                });
+          })
+  );
 });
-
-async function cacheFirst (req){
-	const cache = await caches.open(cacheName);
-	const cached = await cache.match(req);
-	return cached || fetch(req);
-}
-
-async function networkAndCache (req){
-	const cache = await caches.open(cacheName);
-	try{
-		const fresh = await fetch(req);
-		await cache.put(req, fresh.clone());
-		return fresh;
-	} catch (e){
-		const cached = await cache.match(req);
-		return cached;
-	}
-}	

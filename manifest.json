@@ -1,20 +1,21 @@
 {
-	"name": "PWA Test",
-	"short_name": "TEST",
-	"start_url": ".",
-	"display": "standalone",
-	"background_color": "#fff",
-	"description": "Documents zum sau schmeissen",
-	"icons":[
-		{
-			"src": "images/icon.png",
-			"sizes": "512x512",
-			"type":"image/png"
-		},
-		{
-			"src": "images/icon192.png",
-			"sizes": "192x192",
-			"type":"image/png"
-		}
-	]
+  "short_name": "Punktekarte Waging",
+  "name": "Punktekarte Minigolf und Adventuregolf Waging am See",
+  "display": "standalone",
+  "lang":"de_DE",
+  "icons": [
+    {
+      "src": "./img/icons/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": ".img/splashscreens/splashscreen-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "theme_color": "#404549",
+  "background_color": "#34373b"
 }
