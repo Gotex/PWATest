@@ -1,7 +1,9 @@
 
 table{
-  display: table;
+  display: inline-block;
   border: 1px solid gray;
+  transform: rotate(270deg);
+  
 }
 
 tr{
@@ -30,6 +32,27 @@ input[type='number']{
   outline: none;
   /* Firefox turn off arrows*/
   -moz-appearance: textfield;
+}
+
+.hideSum{
+  font-size: 0;
+}
+
+.hidden{
+  display: none;
+}
+
+#scoreboard{
+  height: 100%;
+}
+
+#tableContent {
+  overflow-x: auto;
+  text-align: center;
+}
+
+#mainmenu{
+  text-align: center;
 }
 
 /* Chrome, Safari, Edge, Opera  turn off arrows of input=number*/
