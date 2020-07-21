@@ -2,15 +2,22 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/buildCourse.js"></script>
   </head>
   <body>
-    <Input type="button" value ="Adventuregolf" onclick="buildAdventure()"/>
-    <Input type="button" value ="Minigolf" onclick="buildMinigolf()"/>
-    <Input type="button" value ="Spieler hinzufügen" onclick="addPlayer()"/>
+    <div id="mainmenu">
+      <input type="button" style="width: 300px; height: 150px;" id="btnAdventure" value="Adventuregolf" onclick="buildAdventure()"/>
+      <br><br>
+      <input type="button" style="width: 300px; height: 150px;" id="btnMinigolf" value="Minigolf" onclick="buildMinigolf()"/>
+    </div>
 
-    <div id="tableContent" style="overflow-x:auto;">
-      
+    <div id="scoreboard" class="hidden">
+      <input type="button" id="btnAddPlayer" value="Spieler hinzufügen" onclick="addPlayer()"/>
+      <input type="button" id="btnShowHideSum" value="Ergebnis anzeigen" onclick="showHideSum()"/>
+      <div id="tableContent">
+
+      </div>
     </div>
   </body>
 </html>

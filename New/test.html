@@ -1,0 +1,131 @@
+<table>
+  <tr id="headerLoch">
+      <td class="caption">Loch</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+  </tr>
+  <tr id="headerPar">
+      <td class="caption">Par</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+  </tr>
+  <tr id="p1">
+      <td class="caption">Spieler</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>10</td>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+      <td>16</td>
+      <td>17</td>
+      <td>30</td>
+      <td id="Sum"></td>
+  </tr>
+  <tr id="p2">
+      <td class="caption">Spieler 2</td>
+      <td>13</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>10</td>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+      <td>16</td>
+      <td>17</td>
+      <td>30</td>
+      <td id="p2Sum"></td>
+  </tr>
+</table>
+
+css
+td { padding:5px; border:1px solid #ccc;}
+.caption {
+  font-weight: bold;
+}
+
+js
+
+var switchTable = function (){
+  $("table").each(function() {
+    var $this = $(this);
+    var newrows = [];
+    $this.find("tr").each(function(){
+      var i = 0;
+      $(this).find("td").each(function(){
+        i++;
+        if(newrows[i] === undefined) { newrows[i] = $("<tr></tr>"); }
+        newrows[i].append($(this));
+      });
+    });
+    $this.find("tr").remove();
+    $.each(newrows, function(){
+      $this.append(this);
+    });
+  });
+};
+
+var mode = 0;
+var oldMode = 0;
+
+var toggleTable = function(x){
+  if (x.matches) {
+    mode = 1;
+  } else {
+    mode = 0;
+  }
+  
+  if(mode != oldMode){
+    oldMode = mode;
+    switchTable();
+  }
+};
+
+var x = window.matchMedia("(max-width: 700px)")
+toggleTable(x) // Call listener function at run time
+x.addListener(toggleTable) // Attach listener function on state changes
