@@ -1,17 +1,73 @@
+const CLASSNAMES = {
+  PLAYERSUM: 'playersum',
+  HIDESUM: 'hideSum',
+  HIDDEN: 'hidden',
+  NUMBERUSERINPUT: 'numberUserInput'
+
+};
+
+
+var hideSum = true;
+
 var buildAdventure = function(){
+  hideSum = true;
+  updateBtnShowHideSum();
+  
   var table = buildCourse(18,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
   showTable(table);
 };
 
 var buildMinigolf = function(){
-  var table = buildCourse(18)
+  hideSum = true;
+  updateBtnShowHideSum();
+
+  var table = buildCourse(18);
   showTable(table);
+};
+
+var showHideSum = function (){
+  hideSum = !hideSum;
+
+  var playerSums = document.getElementsByClassName(CLASSNAMES.PLAYERSUM);
+  for (var i = 0; i < playerSums.length; i++){
+    if (hideSum){
+      playerSums[i].classList.add(CLASSNAMES.HIDESUM);
+    } else {
+      playerSums[i].classList.remove(CLASSNAMES.HIDESUM);
+    } 
+  }
+
+  updateBtnShowHideSum();
+};
+
+var updateBtnShowHideSum = function (){
+  var btn = document.getElementById('btnShowHideSum');
+  if (!btn){
+    return;
+  }
+
+  if (hideSum){
+    btn.value = "Ergebnis anzeigen";
+  } else {
+    btn.value = "Ergebnis verbergen";
+  }
 };
 
 var showTable = function (table){
   var div = document.getElementById('tableContent');
   div.innerHTML = '';
   div.appendChild(table);
+
+  var scoreboard = document.getElementById('scoreboard');
+  if(scoreboard.classList.contains(CLASSNAMES.HIDDEN)){
+    scoreboard.classList.remove(CLASSNAMES.HIDDEN);
+  }
+
+  var mainmenu = document.getElementById('mainmenu');
+  if(!mainmenu.classList.contains(CLASSNAMES.HIDDEN)){
+    mainmenu.classList.add(CLASSNAMES.HIDDEN);
+  }
+
 };
 
 var buildCourse = function (holeCount, parList){
@@ -109,7 +165,7 @@ var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
     var playerHole = createTd ('p' + playerNo + 'Hole' + i);
     var playerHoleInput = document.createElement("input");
     playerHoleInput.type = "number";
-    playerHoleInput.classList.add('numberUserInput');
+    playerHoleInput.classList.add(CLASSNAMES.NUMBERUSERINPUT);
     playerHoleInput.onchange = function() {
       var inputs = playerRow.getElementsByClassName('numberUserInput');
       var sum = 0;
@@ -118,6 +174,7 @@ var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
       }
 
       var playerSum = document.getElementById('p' + playerNo + 'Sum');
+
       playerSum.innerHTML = sum;
     };
     playerHole.appendChild(playerHoleInput);
@@ -125,6 +182,10 @@ var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
   }
 
   var playerSum = createTd ('p' + playerNo + 'Sum');
+  playerSum.classList.add(CLASSNAMES.PLAYERSUM);
+  if(hideSum)
+    playerSum.classList.add(CLASSNAMES.HIDESUM);
+
   playerSum.innerHTML = "0";
   playerRow.appendChild(playerSum);
 
