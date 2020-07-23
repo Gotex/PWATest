@@ -2,27 +2,43 @@ const CLASSNAMES = {
   PLAYERSUM: 'playersum',
   HIDESUM: 'hideSum',
   HIDDEN: 'hidden',
-  NUMBERUSERINPUT: 'numberUserInput'
+  NUMBERUSERINPUT: 'numberUserInput',
+  CAPTION: "caption"
 
 };
 
+const ADVENTURE_COURSE = {
+  HOLECOUNT: 18,
+  PAR:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+};
+
+const MINIGOLF_COURSE = {
+  HOLECOUNT: 18,
+  PAR:[]
+};
 
 var hideSum = true;
+var playerCount = 0;
+var eventListening = false;
 
 var buildAdventure = function(){
-  hideSum = true;
-  updateBtnShowHideSum();
-  
-  var table = buildCourse(18,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+  setToDefault();
+
+  var table = buildCourse(ADVENTURE_COURSE.HOLECOUNT, ADVENTURE_COURSE.PAR);
   showTable(table);
 };
 
 var buildMinigolf = function(){
+  setToDefault ();
+
+  var table = buildCourse(MINIGOLF_COURSE.HOLECOUNT, MINIGOLF_COURSE.PAR);
+  showTable(table);
+};
+
+var setToDefault = function (){
   hideSum = true;
   updateBtnShowHideSum();
-
-  var table = buildCourse(18);
-  showTable(table);
+  playerCount = 0;
 };
 
 var showHideSum = function (){
@@ -68,6 +84,10 @@ var showTable = function (table){
     mainmenu.classList.add(CLASSNAMES.HIDDEN);
   }
 
+  var x = window.matchMedia("(orientation: portrait)")
+  toggleTable(x)
+  if(!eventListening)
+    x.addListener(toggleTable)
 };
 
 var buildCourse = function (holeCount, parList){
@@ -75,8 +95,8 @@ var buildCourse = function (holeCount, parList){
   table.id = 'scorecard';
   table.setAttribute('holecount', holeCount)
 
-  var thead = document.createElement('thead');
-  var tbody = document.createElement('tbody');
+  //var thead = document.createElement('thead');
+  //var tbody = document.createElement('tbody');
   
   var headerRowHoles = createRow('hrHoles');
 
@@ -85,7 +105,7 @@ var buildCourse = function (holeCount, parList){
     var thHole;
     if(i == 0){
       thHole = createTh('hHoleCaption');     
-      thHole.innerHTML = 'Hole';
+      thHole.innerHTML = 'Loch';
     } else {
       thHole = createTh('hHole' + i);      
       thHole.innerHTML = i;
@@ -97,7 +117,8 @@ var buildCourse = function (holeCount, parList){
   thHole.innerHTML = 'TOTAL';
   headerRowHoles.appendChild(thHole);
 
-  thead.appendChild(headerRowHoles);
+  //thead.appendChild(headerRowHoles);
+  table.appendChild(headerRowHoles);
 
   if(parList && (parList.length == holeCount)){
     var headerRowPar = createRow('hrPars');
@@ -120,43 +141,52 @@ var buildCourse = function (holeCount, parList){
     thPar.innerHTML = parSum;
     headerRowPar.appendChild(thPar);
 
-    thead.appendChild(headerRowPar);
+    //thead.appendChild(headerRowPar);
+    table.appendChild(headerRowPar);
   }
-  table.appendChild(thead);
+  //table.appendChild(thead);
 
-  addPlayerWithBodyAndHoleCount(tbody, holeCount);
-  table.appendChild(tbody);
+  addPlayerWithBodyAndHoleCount(table, holeCount);
+  //table.appendChild(tbody);
 
   return table;
 };
 
 var addPlayer = function (){
+  if (mode == 1)
+    switchTable();
+
   var table = document.getElementById('scorecard');
   if(!table){
     return;
   }
   addPlayerWithTable(table);
+
+  if (mode == 1)
+    switchTable();
 };
 
 var addPlayerWithTable = function (table){
   var holeCount = table.getAttribute('holecount');
-  var tbodies = table.getElementsByTagName('tbody');
-  if(!tbodies){
-    return;
-  }
+  //var tbodies = table.getElementsByTagName('tbody');
+  //if(!tbodies){
+  //  return;
+  //}
 
-  addPlayerWithBodyAndHoleCount(tbodies[0], holeCount);
+  addPlayerWithBodyAndHoleCount(table, holeCount);
 };
 
-var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
-  var trs = tbody.getElementsByTagName('tr');
-  var playerNo = trs.length + 1;
+var addPlayerWithBodyAndHoleCount = function (table, holeCount){
+  var trs = table.getElementsByTagName('tr');
+  var playerNo = ++playerCount;
 
   var playerRow = createRow('p' + playerNo);
-  var playerColumn = createTd ('p' + playerNo + 'Caption');
+  var playerColumn = createTh ('p' + playerNo + 'Caption');
+  playerColumn.setAttribute('PlayerNo', playerNo);
   var playerInput = document.createElement("input");
   playerInput.type = "text";
   playerInput.placeholder = "Name";
+  playerInput.setAttribute('playerno', playerNo);
 
   playerColumn.appendChild(playerInput);
   playerRow.appendChild(playerColumn);
@@ -165,8 +195,10 @@ var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
     var playerHole = createTd ('p' + playerNo + 'Hole' + i);
     var playerHoleInput = document.createElement("input");
     playerHoleInput.type = "number";
-    playerHoleInput.classList.add(CLASSNAMES.NUMBERUSERINPUT);
-    playerHoleInput.onchange = function() {
+    playerHoleInput.classList.add(CLASSNAMES.NUMBERUSERINPUT + 'p' + playerNo);
+    playerHoleInput.setAttribute('playerno', playerNo);
+    playerHoleInput.setAttribute('onchange', 'onPlayerChangeScore(this)')
+    /*playerHoleInput.onchange = function() {
       var inputs = playerRow.getElementsByClassName('numberUserInput');
       var sum = 0;
       for (var i = 0; i < inputs.length; i++){
@@ -176,7 +208,7 @@ var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
       var playerSum = document.getElementById('p' + playerNo + 'Sum');
 
       playerSum.innerHTML = sum;
-    };
+    };*/
     playerHole.appendChild(playerHoleInput);
     playerRow.appendChild(playerHole);
   }
@@ -189,7 +221,20 @@ var addPlayerWithBodyAndHoleCount = function (tbody, holeCount){
   playerSum.innerHTML = "0";
   playerRow.appendChild(playerSum);
 
-  tbody.appendChild(playerRow);
+  table.appendChild(playerRow);
+};
+
+var onPlayerChangeScore = function (e){
+  var playerNo = e.getAttribute('PlayerNo');
+  var inputs = document.getElementsByClassName(CLASSNAMES.NUMBERUSERINPUT + 'p' + playerNo);
+  var sum = 0;
+  for (var i = 0; i < inputs.length; i++){
+    sum += Number(inputs[i].value);
+  }
+
+  var playerSum = document.getElementById('p' + playerNo + 'Sum');
+
+  playerSum.innerHTML = sum;
 };
 
 var createRow = function (idStr){
@@ -200,7 +245,8 @@ var createRow = function (idStr){
 };
 
 var createTh = function (idStr){
-  var th = document.createElement('th');
+  var th = document.createElement('td');
+  th.classList.add(CLASSNAMES.CAPTION);
   th.id = idStr;
   
   return th;

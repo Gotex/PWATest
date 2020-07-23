@@ -1,9 +1,7 @@
 
 table{
   display: inline-block;
-  border: 1px solid gray;
-  transform: rotate(270deg);
-  
+  border: 1px solid gray; 
 }
 
 tr{
@@ -40,6 +38,10 @@ input[type='number']{
 
 .hidden{
   display: none;
+}
+
+.caption {
+  font-weight: bold;
 }
 
 #scoreboard{
