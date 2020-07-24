@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
-
     <!-- Add link rel manifest -->
     <link rel="manifest" href="./manifest.json">
     <!-- Add iOS meta tags and icons -->
@@ -18,63 +13,26 @@
     <!-- Add meta theme-color -->
     <meta name="theme-color" content="#2F3BA2" />
     <!-- Set viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="./js/materialize.min.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="./css/punktekarte.css"/>
-
-    <script type="text/javascript" src="./js/index.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/buildCourse.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
   </head>
   <body>
-    <button onclick="newPlayer()">Spieler hinzuf&uuml;gen</button>
-    <button onclick="toggleScore()">Summe anzeigen</button>
-    <table class="responsive-table">
-      <tr id="tHeader">
-        <th>Loch</th>
-        <th>Par</th>
-      </tr>
-      <tr id="0">
-        <td>1</td>
-        <td>2</td>
-      </tr>
-      <tr id="1">
-        <td>2</td>
-        <td>3</td>
-      </tr>
-      <tr id="2">
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr id="3">
-        <td>4</td>
-        <td>2</td>
-      </tr>
-      <tr id="4">
-        <td>5</td>
-        <td>3</td>
-      </tr>
-      <tr id="5">
-        <td>6</td>
-        <td>2</td>
-      </tr>
-      <tr id="6">
-        <td>7</td>
-        <td>3</td>
-      </tr>
-      <tr id="7">
-        <td>8</td>
-        <td>4</td>
-      </tr>
-      <tr id="8">
-        <td>9</td>
-        <td>2</td>
-      </tr>
-      <tr id="sum">
-        <td>TOTAL</td>
-        <td>34</td>
-      </tr>
-    </table>
+    <div id="mainmenu">
+      <input type="button" style="width: 300px; height: 150px;" id="btnAdventure" value="Adventuregolf" onclick="buildAdventure()"/>
+      <br><br>
+      <input type="button" style="width: 300px; height: 150px;" id="btnMinigolf" value="Minigolf" onclick="buildMinigolf()"/>
+    </div>
+
+    <div id="scoreboard" class="hidden">
+      <input type="button" id="btnAddPlayer" value="Spieler hinzufügen" onclick="addPlayer()"/>
+      <input type="button" id="btnShowHideSum" value="Ergebnis anzeigen" onclick="showHideSum()"/>
+      <div id="tableContent">
+
+      </div>
+    </div>
   </body>
 </html>
