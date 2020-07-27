@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Add iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Punktekarte Minigolf Waging am See">
+    <link rel="apple-touch-icon" href="../img/icons/logo.png">
+    <!-- Add description here -->
+    <meta name="description" content="Minigolf und Adventuregold Punktekarte">
+    <!-- Add meta theme-color -->
+    <meta name="theme-color" content="#2F3BA2" />
+    <!-- Set viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/style.css"/>
+    <script type="text/javascript" src="../js/app.js"></script>
+    <script type="text/javascript" src="../js/buildCourse.js"></script>
+    <script type="text/javascript" src="../js/minigolf.js"></script>
+  </head>
+  <body>
+    <div id="scoreboard">
+      <div id="tableContent">
+
+      </div>
+      <div class="ingame-menu row">
+          <div class="col-3 golfButton">
+            <img src="../img/golf-ball.png">
+            <button id="btnAddPlayer" onclick="addPlayer()">Spieler hinzufügen</button>
+          </div>
+          <div class="col-3 golfButton">
+            <img src="../img/golf-ball.png">
+            <button id="btnShowHideSum" onclick="showHideSum()">Ergebnis anzeigen</button>
+          </div>
+          <div class="col-3 golfButton">
+            <img src="../img/golf-ball.png">
+            <a href="../index.html">
+              <button id="btnEndRound" onclick="showRanking()">Runde beenden</button>
+            </a>
+          </div>
+          <div class="col-3 golfButton">
+            <img src="../img/golf-ball.png">
+            <a href="../index.html">
+              <button id="btnNewRound" onclick="removeFromSessionStorage()">Neue Runde</button>
+            </a>
+          </div>
+          <!--<input type="button" class="col-3" id="btnAddPlayer" value="Spieler hinzufügen" onclick="addPlayer()"/>
+          <input type="button" class="col-3" id="btnShowHideSum" value="Ergebnis anzeigen" onclick="showHideSum()"/>
+          <input type="button" class="col-3" id="btnEndRound" value="Runde beenden"/>
+          <input type="button" class="col-3" id="btnNewRound" value="Neue Runde"/>-->
+      </div>
+    </div>
+  </body>
+</html>
