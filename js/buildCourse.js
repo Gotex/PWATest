@@ -6,31 +6,59 @@ const CLASSNAMES = {
   CAPTION: "caption"
 };
 
-const ADVENTURE_COURSE = {
-  HOLECOUNT: 18,
-  PAR:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-};
-
-const MINIGOLF_COURSE = {
-  HOLECOUNT: 18,
-  PAR:[]
-};
-
 var hideSum = true;
 var playerCount = 0;
 var eventListening = false;
 
-var buildAdventure = function(){
-  setToDefault();
+var landscape = false;
+var prevLandscape = false;
 
-  var table = buildCourse(ADVENTURE_COURSE.HOLECOUNT, ADVENTURE_COURSE.PAR);
-  showTable(table);
+var switchTable = function (){
+  scorecard = document.getElementById('scorecard');
+  if(!scorecard){
+    return;
+  }
+  var newRows = [];
+
+  var rows = scorecard.getElementsByTagName('tr');
+  for (var rowIdx = 0; rowIdx < rows.length; rowIdx++){
+    var newRowIdx = 0;
+    var columns = rows[rowIdx].getElementsByTagName('td');
+    for (var colIdx = 0; colIdx < columns.length; colIdx++){
+      if(newRows[newRowIdx] === undefined) {
+        newRows[newRowIdx] = document.createElement("tr");
+      }
+      newRows[newRowIdx].appendChild(columns[colIdx].cloneNode(true));
+      newRowIdx++;
+    }
+  }
+  
+  for (var rowIdx = rows.length - 1; rowIdx >= 0; rowIdx--){
+    scorecard.removeChild(rows[rowIdx]);
+  }
+
+  for (var i = 0; i < newRows.length; i++){
+    scorecard.appendChild(newRows[i]);
+  }
 };
 
-var buildMinigolf = function(){
-  setToDefault ();
+var toggleTable = function(x){
+  if (x.matches) {
+    landscape = true;
+  } else {
+    landscape = false;
+  }
+  
+  if(landscape != prevLandscape){
+    prevLandscape = landscape;
+    switchTable();
+  }
+};
 
-  var table = buildCourse(MINIGOLF_COURSE.HOLECOUNT, MINIGOLF_COURSE.PAR);
+var buildCourse = function (holecount, parList){
+  setToDefault();
+
+  var table = buildTable(holecount, parList);
   showTable(table);
 };
 
@@ -62,9 +90,9 @@ var updateBtnShowHideSum = function (){
   }
 
   if (hideSum){
-    btn.value = "Ergebnis anzeigen";
+    btn.innerText = "Ergebnis anzeigen";
   } else {
-    btn.value = "Ergebnis verbergen";
+    btn.innerText = "Ergebnis verbergen";
   }
 };
 
@@ -73,23 +101,13 @@ var showTable = function (table){
   div.innerHTML = '';
   div.appendChild(table);
 
-  var scoreboard = document.getElementById('scoreboard');
-  if(scoreboard.classList.contains(CLASSNAMES.HIDDEN)){
-    scoreboard.classList.remove(CLASSNAMES.HIDDEN);
-  }
-
-  var mainmenu = document.getElementById('mainmenu');
-  if(!mainmenu.classList.contains(CLASSNAMES.HIDDEN)){
-    mainmenu.classList.add(CLASSNAMES.HIDDEN);
-  }
-
   var x = window.matchMedia("(orientation: portrait)")
   toggleTable(x)
   if(!eventListening)
     x.addListener(toggleTable)
 };
 
-var buildCourse = function (holeCount, parList){
+var buildTable = function (holeCount, parList){
   var table = document.createElement('table');
   table.id = 'scorecard';
   table.setAttribute('holecount', holeCount)
@@ -139,7 +157,7 @@ var buildCourse = function (holeCount, parList){
     table.appendChild(headerRowPar);
   }
 
-  addPlayerWithBodyAndHoleCount(table, holeCount);
+  //addPlayerWithBodyAndHoleCount(table, holeCount);
 
   return table;
 };
@@ -152,39 +170,75 @@ var addPlayer = function (){
   if(!table){
     return;
   }
-  addPlayerWithTable(table);
+
+  var holeCount = table.getAttribute('holecount');
+  var playerNo = ++playerCount;
+  addPlayerWithBodyAndHoleCount(table, holeCount, playerNo, undefined, undefined);
+
+  if(scorecardData){
+    scorecardData.addPlayer(playerNo);
+    saveToSessionStorage();
+  }
 
   if (landscape == 1)
     switchTable();
 };
 
-var addPlayerWithTable = function (table){
-  var holeCount = table.getAttribute('holecount');
-  addPlayerWithBodyAndHoleCount(table, holeCount);
+var addPlayerWithScorecardData = function (){
+  if(!scorecardData){
+    throw "No ScorecardData available!";
+  }
+
+  if (landscape == 1)
+    switchTable();
+
+  var table = document.getElementById('scorecard');
+  if(!table){
+    return;
+  }
+  
+  for(var i = 0; i < scorecardData.players.length; i++){
+    addPlayerWithBodyAndHoleCount(table, scorecardData.holecount, 
+      scorecardData.players[i].playerNo, scorecardData.players[i].name, scorecardData.players[i].scores);
+  }
+  
+  playerCount = scorecardData.players.length;
+
+  if (landscape == 1)
+    switchTable();
 };
 
-var addPlayerWithBodyAndHoleCount = function (table, holeCount){
+var addPlayerWithBodyAndHoleCount = function (table, holeCount, playerNo, name, scores){
   var trs = table.getElementsByTagName('tr');
-  var playerNo = ++playerCount;
-
   var playerRow = createRow('p' + playerNo);
   var playerColumn = createTh ('p' + playerNo + 'Caption');
   playerColumn.setAttribute('PlayerNo', playerNo);
   var playerInput = document.createElement("input");
   playerInput.type = "text";
   playerInput.placeholder = "Name";
+  if(name){
+    playerInput.value = name;
+  }
   playerInput.setAttribute('playerno', playerNo);
+  playerInput.setAttribute('onchange', 'onPlayerChangeName(this)')
 
   playerColumn.appendChild(playerInput);
   playerRow.appendChild(playerColumn);
-
+  
+  var scoresum = 0;
   for (i = 1; i <= holeCount; i++){
     var playerHole = createTd ('p' + playerNo + 'Hole' + i);
     var playerHoleInput = document.createElement("input");
     playerHoleInput.type = "number";
     playerHoleInput.classList.add(CLASSNAMES.NUMBERUSERINPUT + 'p' + playerNo);
     playerHoleInput.setAttribute('playerno', playerNo);
+    playerHoleInput.setAttribute('holeNo', i);
     playerHoleInput.setAttribute('onchange', 'onPlayerChangeScore(this)')
+    if(scores){
+      score = Number(scores[i - 1]);
+      playerHoleInput.value = score;
+      scoresum += score;
+    }
     playerHole.appendChild(playerHoleInput);
     playerRow.appendChild(playerHole);
   }
@@ -194,14 +248,30 @@ var addPlayerWithBodyAndHoleCount = function (table, holeCount){
   if(hideSum)
     playerSum.classList.add(CLASSNAMES.HIDESUM);
 
-  playerSum.innerHTML = "0";
+  playerSum.innerHTML = scoresum;
   playerRow.appendChild(playerSum);
 
   table.appendChild(playerRow);
 };
 
+var onPlayerChangeName = function (e){
+  if(!scorecardData){
+    return;
+  }
+
+  var playerNo = e.getAttribute('PlayerNo');
+  scorecardData.setPlayerName(playerNo, e.value);
+  saveToSessionStorage();
+};
+
 var onPlayerChangeScore = function (e){
   var playerNo = e.getAttribute('PlayerNo');
+  if(scorecardData){
+    var holeNo = e.getAttribute('holeNo');
+    scorecardData.setPlayerScore(playerNo, holeNo, e.value);
+    saveToSessionStorage();
+  }
+
   var inputs = document.getElementsByClassName(CLASSNAMES.NUMBERUSERINPUT + 'p' + playerNo);
   var sum = 0;
   for (var i = 0; i < inputs.length; i++){
