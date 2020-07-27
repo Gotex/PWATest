@@ -236,7 +236,8 @@ var addPlayerWithBodyAndHoleCount = function (table, holeCount, playerNo, name, 
     playerHoleInput.setAttribute('onchange', 'onPlayerChangeScore(this)')
     if(scores){
       score = Number(scores[i - 1]);
-      playerHoleInput.value = score;
+      if (score != 0)
+        playerHoleInput.value = score;
       scoresum += score;
     }
     playerHole.appendChild(playerHoleInput);
