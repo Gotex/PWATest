@@ -234,6 +234,7 @@ var addPlayerWithBodyAndHoleCount = function (table, holeCount, playerNo, name, 
     playerHoleInput.setAttribute('playerno', playerNo);
     playerHoleInput.setAttribute('holeNo', i);
     playerHoleInput.setAttribute('onchange', 'onPlayerChangeScore(this)')
+    playerHoleInput.setAttribute('pattern', '\\d*');
     if(scores){
       score = Number(scores[i - 1]);
       if (score != 0)
