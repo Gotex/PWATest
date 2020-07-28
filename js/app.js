@@ -6,6 +6,7 @@ const MODES = {
 Object.freeze(MODES);
 
 var scorecardData = undefined;
+var modal = undefined;
 
 const SESSION_STORAGE_KEY_SCORECARD_DATA = "WagingScorecard";
 var saveToSessionStorage = function (){
@@ -169,20 +170,136 @@ var showRanking = function (){
   var rankingStr = '';
   var scores = scorecardData.getPlayerScoresSorted();
 
-  for (var i = 0; i < scores.length; i++){
-    if (i == 0){
-      rankingStr = (i+1) + '. ' + scores[i].player + '\tPunkte: ' + scores[i].sum;
-    } else {
-      rankingStr += '\n' + (i+1) + '. ' + scores[i].player + '\tPunkte: ' + scores[i].sum;
-    }
-  }
+  
 
-  alert(rankingStr);
-  removeFromSessionStorage();
-  window.location.replace("../index.html");
+  if(modal){
+    var contentDiv = document.getElementById("ranking-content");
+    contentDiv.innerHTML = "";
+    
+    var divCaption = document.createElement("div");
+    var classNameCaption = "rankingEntryCaption";
+    divCaption.classList.add(classNameCaption);
+    divCaption.classList.add("row");
+
+    var picutreDivCaption = document.createElement("div");
+    var picDivClassCaption = classNameCaption + "Pic";
+    picutreDivCaption.classList.add(picDivClassCaption);
+    picutreDivCaption.classList.add("col-2");
+    var pRankCaption = document.createElement("h2");
+    pRankCaption.innerText = "Platz";
+
+    picutreDivCaption.appendChild(pRankCaption);
+    divCaption.appendChild(picutreDivCaption);
+
+    var nameDivCaption = document.createElement("div");
+    var nameDivClassCaption = classNameCaption + "Name";
+    nameDivCaption.classList.add(nameDivClassCaption);
+    nameDivCaption.classList.add("col-5");
+
+    var pNameCaption = document.createElement("h2");
+    pNameCaption.innerText = "Name";
+    
+    nameDivCaption.appendChild(pNameCaption);
+    divCaption.appendChild(nameDivCaption);
+
+    var sumDivCaption = document.createElement("div");
+    var sumDivClassCaption = classNameCaption + "Sum";
+    sumDivCaption.classList.add(sumDivClassCaption);
+    sumDivCaption.classList.add("col-5");
+
+    var pSumCaption = document.createElement("h2");
+    pSumCaption.innerText = "Punktzahl";
+
+    sumDivCaption.appendChild(pSumCaption);
+    divCaption.appendChild(sumDivCaption);
+
+    contentDiv.appendChild(divCaption);
+
+    for (var i = 0; i < scores.length; i++){
+      var div = document.createElement("div");
+      var className = "rankingEntry";
+      if(i < 3){
+        div.classList.add("rank" + (i+1));
+      }
+      div.classList.add(className);
+      div.classList.add("row");
+
+      var picutreDiv = document.createElement("div");
+      var picDivClass = className + "Pic";
+      picutreDiv.classList.add(picDivClass);
+      picutreDiv.classList.add("col-2");
+      var pRank = document.createElement("p");
+      pRank.innerText = (i+1) + ".";
+
+      picutreDiv.appendChild(pRank);
+      div.appendChild(picutreDiv);
+
+      var nameDiv = document.createElement("div");
+      var nameDivClass = className + "Name";
+      nameDiv.classList.add(nameDivClass);
+      nameDiv.classList.add("col-5");
+
+      var pName = document.createElement("p");
+      pName.innerText = scores[i].player;
+      
+      nameDiv.appendChild(pName);
+      div.appendChild(nameDiv);
+
+      var sumDiv = document.createElement("div");
+      var sumDivClass = className + "Sum";
+      sumDiv.classList.add(sumDivClass);
+      sumDiv.classList.add("col-5");
+
+      var pSum = document.createElement("p");
+      pSum.innerText = scores[i].sum;
+
+      sumDiv.appendChild(pSum);
+      div.appendChild(sumDiv);
+
+      contentDiv.appendChild(div);
+    }
+
+    modal.style.display = "block";
+  } else {
+    for (var i = 0; i < scores.length; i++){
+      if (i == 0){
+        rankingStr = (i+1) + '. ' + scores[i].player + '\tPunkte: ' + scores[i].sum;
+      } else {
+        rankingStr += '\n' + (i+1) + '. ' + scores[i].player + '\tPunkte: ' + scores[i].sum;
+      }
+    }
+
+    alert(rankingStr);
+
+    newRound();
+  }
 };
 
 var newRound = function (){
   removeFromSessionStorage();
   window.location.replace("../index.html");
-}
+};
+
+var setupModal = function (){
+  modal = document.getElementById("myModal");
+  if (!modal){
+    return;
+  }
+
+  var span = document.getElementsByClassName("close");
+  if(!span || span.length <= 0){
+    return;
+  }
+  
+  span[0].onclick = function() {
+    modal.style.display = "none";
+  };
+  
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+};
+
+window.addEventListener("load", setupModal);
