@@ -28,11 +28,6 @@ var createAdventure = function (){
   }
 };
 
-var showRanking = function (){
-  alert("Hier kommt das Ranking");
-  removeFromSessionStorage();
-};
-
 var adjustFixedMenuSpacer = function (){
   var spacer = document.getElementById("fixedMenuSpacer");
   var menu = document.getElementById("fixedMenu");

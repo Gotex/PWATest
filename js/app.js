@@ -55,8 +55,9 @@ var ScorecardData = function (){
   };
 
   this.addPlayer = function (playerNo){
-    if(!this.isSetup)
+    if(!this.isSetup){
       throw "Object is not set up! Please use the setup() method";
+    }
 
     var newPlayer = new PlayerData();
     newPlayer.setup(playerNo, this.holecount);
@@ -99,6 +100,34 @@ var ScorecardData = function (){
       return value;
     });
   };
+
+  this.getPlayerScores = function (){
+    var playerScores = [];
+    for(var i = 0; i < this.players.length; i++){
+      var playerSum = this.players[i].getScoreSum();
+      /*var playerObj = new Object();
+      playerObj.player = (this.players[i].name == '' || this.players[i].name == undefined) ? this.players[i].playerNo : this.players[i].name;
+      playerObj.sum = playerSum;*/
+      var playerObj = {
+        player: (this.players[i].name == '' || this.players[i].name == undefined) ? this.players[i].playerNo : this.players[i].name,
+        sum: playerSum
+      };
+      playerScores.push(playerObj);
+    }
+
+    return playerScores;
+  };
+
+  this.getPlayerScoresSorted = function (){
+    var playerScores = this.getPlayerScores();
+
+    playerScores.sort(function (a,b){
+      return a.sum - b.sum;
+    });
+
+    return playerScores;
+  }
+
 };
 
 var PlayerData = function (){
@@ -126,4 +155,34 @@ var PlayerData = function (){
   this.setHoleScore = function (hole, score){
     this.scores[hole - 1] = score;
   };
+
+  this.getScoreSum = function (){
+    var sum = 0;
+    for(var i = 0; i < this.scores.length; i++){
+      sum += Number(this.scores[i]);
+    }
+    return sum;
+  };
 };
+
+var showRanking = function (){
+  var rankingStr = '';
+  var scores = scorecardData.getPlayerScoresSorted();
+
+  for (var i = 0; i < scores.length; i++){
+    if (i == 0){
+      rankingStr = (i+1) + '. ' + scores[i].player + '\tPunkte: ' + scores[i].sum;
+    } else {
+      rankingStr += '\n' + (i+1) + '. ' + scores[i].player + '\tPunkte: ' + scores[i].sum;
+    }
+  }
+
+  alert(rankingStr);
+  removeFromSessionStorage();
+  window.location.replace("../index.html");
+};
+
+var newRound = function (){
+  removeFromSessionStorage();
+  window.location.replace("../index.html");
+}

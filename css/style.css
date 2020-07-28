@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-body{
-  margin: 0;
-}
-
 table{
   display: inline-block;
   border: 1px solid gray; 
@@ -30,7 +26,7 @@ input[type='text']{
 }
 
 input[type='number']{
-  width: 25px;
+  width: 50px;
   padding: 0;
   margin: 0;
   border: 1px none gray;
@@ -70,7 +66,10 @@ input[type='button']{
 }
 
 #mainmenu{
-  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  position: absolute;
 }
 
 /* Chrome, Safari, Edge, Opera  turn off arrows of input=number*/
