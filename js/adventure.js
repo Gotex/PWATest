@@ -33,4 +33,10 @@ var showRanking = function (){
   removeFromSessionStorage();
 };
 
+var adjustFixedMenuSpacer = function (){
+  var spacer = document.getElementById("fixedMenuSpacer");
+  var menu = document.getElementById("fixedMenu");
+  spacer.style.height = menu.scrollHeight + "px";
+}
+
 window.addEventListener("load", createAdventure);

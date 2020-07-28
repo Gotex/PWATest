@@ -157,8 +157,6 @@ var buildTable = function (holeCount, parList){
     table.appendChild(headerRowPar);
   }
 
-  //addPlayerWithBodyAndHoleCount(table, holeCount);
-
   return table;
 };
 
