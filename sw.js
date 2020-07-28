@@ -2,6 +2,8 @@ const CACHE_NAME = 'static-cache-v1';
 const FILES_TO_CACHE = [
   './css/',
   './css/style.css',
+  './img/',
+  './img/golf-ball.png',
   './js/',
   './js/app.js',
   './js/buildCourse.js',
