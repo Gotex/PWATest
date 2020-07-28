@@ -4,8 +4,13 @@ const FILES_TO_CACHE = [
   './js/app.js',
   './js/buildCourse.js',
   './js/index.js',
+  './js/adventure.js',
+  './js/minigolf.js',
+  './pages/adventure.html',
+  './pages/minigolf.html',
   './index.html',
-  './offline.html'
+  './offline.html',
+  './'
 ];
 
 self.addEventListener('install', function(event) {
