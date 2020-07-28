@@ -1,4 +1,4 @@
-const CACHE_NAME = 'static-cache-v1';
+const CACHE_NAME = 'static-cache-v3';
 const FILES_TO_CACHE = [
   './',
   'index.html',
@@ -46,6 +46,10 @@ self.addEventListener('fetch', function(event) {
   }
   event.respondWith(
       fetch(event.request)
+          .then((res) =>{
+            var cache = caches.open(CACHE_NAME);
+            cache.
+          })
           .catch(() => {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
