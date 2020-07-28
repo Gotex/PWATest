@@ -10,8 +10,7 @@ const FILES_TO_CACHE = [
   '/pages/adventure.html',
   '/pages/minigolf.html',
   '/index.html',
-  '/offline.html',
-  '/manifest.json'
+  '/offline.html'
 ];
 
 self.addEventListener('install', function(event) {
