@@ -1,19 +1,14 @@
 const CACHE_NAME = 'static-cache-v2';
 const FILES_TO_CACHE = [
-  './css/',
   './css/style.css',
-  './img/',
   './img/golf-ball.png',
-  './js/',
   './js/app.js',
   './js/buildCourse.js',
   './js/index.js',
   './js/adventure.js',
   './js/minigolf.js',
-  './pages/',
   './pages/adventure.html',
   './pages/minigolf.html',
-  './',
   './index.html',
   './offline.html',
   './manifest.json'
