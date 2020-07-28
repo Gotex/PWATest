@@ -53,6 +53,13 @@ self.addEventListener('fetch', function(event) {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
                   return cache.match(event.request)
+                    .then(function (res){
+                      if(res == undefined){
+                        return cache.match('offline.html');  
+                      }
+
+                      return res;
+                    })
                     .catch(() =>{
                       return cache.match('offline.html');
                     });
