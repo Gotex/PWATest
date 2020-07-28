@@ -11,8 +11,7 @@ const FILES_TO_CACHE = [
   '/pages/minigolf.html',
   '/index.html',
   '/offline.html',
-  '/manifest.json',
-  '/'
+  '/manifest.json'
 ];
 
 self.addEventListener('install', function(event) {
