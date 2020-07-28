@@ -18,12 +18,13 @@
     <script type="text/javascript" src="../js/buildCourse.js"></script>
     <script type="text/javascript" src="../js/minigolf.js"></script>
   </head>
-  <body>
+  <body onresize="adjustFixedMenuSpacer()">
     <div id="scoreboard">
       <div id="tableContent">
 
       </div>
-      <div class="ingame-menu row">
+      <div id="fixedMenuSpacer"></div>
+      <div id="fixedMenu" class="ingame-menu row">
           <div class="col-3 golfButton">
             <img src="../img/golf-ball.png">
             <button id="btnAddPlayer" onclick="addPlayer()">Spieler hinzufügen</button>
@@ -44,10 +45,6 @@
               <button id="btnNewRound" onclick="removeFromSessionStorage()">Neue Runde</button>
             </a>
           </div>
-          <!--<input type="button" class="col-3" id="btnAddPlayer" value="Spieler hinzufügen" onclick="addPlayer()"/>
-          <input type="button" class="col-3" id="btnShowHideSum" value="Ergebnis anzeigen" onclick="showHideSum()"/>
-          <input type="button" class="col-3" id="btnEndRound" value="Runde beenden"/>
-          <input type="button" class="col-3" id="btnNewRound" value="Neue Runde"/>-->
       </div>
     </div>
   </body>
