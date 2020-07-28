@@ -106,14 +106,13 @@ var ScorecardData = function (){
     var playerScores = [];
     for(var i = 0; i < this.players.length; i++){
       var playerSum = this.players[i].getScoreSum();
-      /*var playerObj = new Object();
-      playerObj.player = (this.players[i].name == '' || this.players[i].name == undefined) ? this.players[i].playerNo : this.players[i].name;
-      playerObj.sum = playerSum;*/
-      var playerObj = {
-        player: (this.players[i].name == '' || this.players[i].name == undefined) ? this.players[i].playerNo : this.players[i].name,
-        sum: playerSum
-      };
-      playerScores.push(playerObj);
+      if(playerSum > 0){ 
+        var playerObj = {
+          player: (this.players[i].name == '' || this.players[i].name == undefined) ? this.players[i].playerNo : this.players[i].name,
+          sum: playerSum
+        };
+        playerScores.push(playerObj);
+      }
     }
 
     return playerScores;
