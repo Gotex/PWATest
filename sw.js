@@ -1,17 +1,18 @@
 const CACHE_NAME = 'static-cache-v2';
 const FILES_TO_CACHE = [
-  './css/style.css',
-  './img/golf-ball.png',
-  './js/app.js',
-  './js/buildCourse.js',
-  './js/index.js',
-  './js/adventure.js',
-  './js/minigolf.js',
-  './pages/adventure.html',
-  './pages/minigolf.html',
-  './index.html',
-  './offline.html',
-  './manifest.json'
+  '/css/style.css',
+  '/img/golf-ball.png',
+  '/js/app.js',
+  '/js/buildCourse.js',
+  '/js/index.js',
+  '/js/adventure.js',
+  '/js/minigolf.js',
+  '/pages/adventure.html',
+  '/pages/minigolf.html',
+  '/index.html',
+  '/offline.html',
+  '/manifest.json',
+  '/'
 ];
 
 self.addEventListener('install', function(event) {
