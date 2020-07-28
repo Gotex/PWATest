@@ -48,7 +48,10 @@ self.addEventListener('fetch', function(event) {
           .catch(() => {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
-                  return cache.match('offline.html');
+                  return cache.match(event.request)
+                    .catch(() =>{
+                      return cache.match('offline.html');
+                    });
                 });
           })
   );
