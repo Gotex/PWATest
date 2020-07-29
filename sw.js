@@ -11,7 +11,10 @@ const FILES_TO_CACHE = [
   'js/minigolf.js',
   'pages/adventure.html',
   'pages/minigolf.html',
-  'img/golf-ball.png'
+  'img/golf-ball.png',
+  'img/start/adventuregolf.jpg',
+  'img/start/minigolf.jpg',
+  'img/start/background.jpg'
 ];
 
 self.addEventListener('install', function(event) {
