@@ -20,44 +20,46 @@
   </head>
   <body onresize="adjustFixedMenuSpacer()">
     <div id="scoreboard">
-      <div id="tableContent">
+      <div class="background-main">
+        <div id="tableContent">
 
-      </div>
-      <div id="fixedMenuSpacer"></div>
-      <div id="fixedMenu" class="ingame-menu row">
-          <div class="col-3 golfButton">
-            <img src="../img/golf-ball.png">
-            <button id="btnAddPlayer" onclick="addPlayer()">Spieler hinzufügen</button>
-          </div>
-          <div class="col-3 golfButton">
-            <img src="../img/golf-ball.png">
-            <button id="btnShowHideSum" onclick="showHideSum()">Ergebnis anzeigen</button>
-          </div>
-          <div class="col-3 golfButton">
-            <img src="../img/golf-ball.png">
-            <button id="btnEndRound" onclick="showRanking()">Runde beenden</button>
-          </div>
-          <div class="col-3 golfButton">
-            <img src="../img/golf-ball.png">
-            <button id="btnNewRound" onclick="newRound()">Neue Runde</button>
-          </div>
-      </div>
-
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <header class="modal-header">
-            <span class="close">&times;</span>
-            <h1>Ranking</h1>
-          </header>
-          <div id="ranking-content" class="modal-ranking">
-              
-          </div>
-          <footer class="modal-footer">
-            <button id="btnFinishRound" onclick="newRound()">Runde beenden</button>
-          </footer>
         </div>
+        <div id="fixedMenuSpacer"></div>
+        <div id="fixedMenu" class="ingame-menu row">
+            <div class="col-3 golfButton">
+              <img src="../img/golf-ball.png">
+              <button id="btnAddPlayer" onclick="addPlayer()">Spieler hinzufügen</button>
+            </div>
+            <div class="col-3 golfButton">
+              <img src="../img/golf-ball.png">
+              <button id="btnShowHideSum" onclick="showHideSum()">Ergebnis anzeigen</button>
+            </div>
+            <div class="col-3 golfButton">
+              <img src="../img/golf-ball.png">
+              <button id="btnEndRound" onclick="showRanking()">Runde beenden</button>
+            </div>
+            <div class="col-3 golfButton">
+              <img src="../img/golf-ball.png">
+              <button id="btnNewRound" onclick="newRound()">Neue Runde</button>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <header class="modal-header">
+              <span class="close">&times;</span>
+              <h1>Ranking</h1>
+            </header>
+            <div id="ranking-content" class="modal-ranking">
+                
+            </div>
+            <footer class="modal-footer">
+              <button id="btnFinishRound" onclick="newRound()">Runde beenden</button>
+            </footer>
+          </div>
+        </div>
+        
       </div>
-      
     </div>
   </body>
 </html>
