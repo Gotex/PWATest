@@ -15,15 +15,15 @@ var saveToSessionStorage = function (){
   }
 
   var jsonStr = scorecardData.makeJson();
-  window.sessionStorage.setItem(SESSION_STORAGE_KEY_SCORECARD_DATA, jsonStr);
+  window.localStorage.setItem(SESSION_STORAGE_KEY_SCORECARD_DATA, jsonStr);
 };
 
 var removeFromSessionStorage = function (){
-  window.sessionStorage.removeItem(SESSION_STORAGE_KEY_SCORECARD_DATA); 
+  window.localStorage.removeItem(SESSION_STORAGE_KEY_SCORECARD_DATA); 
 };
 
 var getFromSessionStorage = function (){
-  var jsonStr = window.sessionStorage.getItem(SESSION_STORAGE_KEY_SCORECARD_DATA);
+  var jsonStr = window.localStorage.getItem(SESSION_STORAGE_KEY_SCORECARD_DATA);
   if(jsonStr){
     return jsonStr;
   }
