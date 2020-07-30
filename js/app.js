@@ -280,6 +280,11 @@ var newRound = function (){
 };
 
 var setupModal = function (){
+  //modals = document.getElementsByClassName("modal");
+  //if(!modals || modals.length <= 0){
+  //  return;
+  //}
+
   modal = document.getElementById("myModal");
   if (!modal){
     return;
