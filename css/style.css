@@ -10,6 +10,7 @@ table{
   display: inline-block;
   border: 1px solid gray; 
   background-color: white;
+  margin-top: 25px;
 }
 
 tr{
