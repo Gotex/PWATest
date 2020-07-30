@@ -40,6 +40,12 @@ input[type='number']{
   -moz-appearance: textfield;
 }
 
+@media only screen and (orientation: landscape){
+  input[type='number']{
+    width: 25px;
+  }
+}
+
 .hideSum{
   font-size: 0;
 }
