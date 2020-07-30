@@ -1,4 +1,4 @@
-const CACHE_NAME = 'static-cache-v20200730';
+const CACHE_NAME = 'static-cache-v20200730-1';
 const FILES_TO_CACHE = [
   './',
   'index.html',
@@ -14,7 +14,8 @@ const FILES_TO_CACHE = [
   'img/golf-ball.png',
   'img/start/adventuregolf.jpg',
   'img/start/minigolf.jpg',
-  'img/start/background.jpg'
+  'img/start/background.jpg',
+  'sw.js'
 ];
 
 self.addEventListener('install', function(event) {
