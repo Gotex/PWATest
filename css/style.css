@@ -323,3 +323,83 @@ button#btnFinishRound{
 #btnMinigolf{
   background-image: url('../img/start/minigolf.jpg'); 
 }
+
+#logo-main{
+  margin-top: 12px;
+  position: absolute;
+  left:50%;
+  
+  transform: translate(-50%, -0%);
+  -ms-transform: translate(-50%, -0%);
+}
+
+#logo-main img{
+  height:100%;
+  width:100%;
+}
+
+@media only screen and (max-height: 599px){
+  #logo-main{
+    display: none;
+  }
+
+  #logo-main img{
+    display: none;
+  }
+}
+
+@media only screen and (min-height: 600px){
+  #logo-main{
+    display: block;
+  }
+
+  #logo-main img{
+    height:50%;
+    width:50%;
+    transform: translate(45%, -0%);
+    -ms-transform: translate(45%, -0%);
+    display: block;
+  }
+}
+
+@media only screen and (min-height: 650px){
+  #logo-main{
+    display: block;
+  }
+
+  #logo-main img{
+    height:60%;
+    width:60%;
+    transform: translate(30%, -0%);
+    -ms-transform: translate(30%, -0%);
+    display: block;
+  }
+}
+
+@media only screen and (min-height: 710px){
+  #logo-main{
+    display: block;
+  }
+
+  #logo-main img{
+    height:80%;
+    width:80%;
+    transform: translate(12%, -0%);
+    -ms-transform: translate(12%, -0%);
+    display: block;
+  }
+}
+
+@media only screen and (min-height: 800px){
+  #logo-main{
+    display: block;
+  }
+
+  #logo-main img{
+    height:100%;
+    width:100%;
+    transform: translate(0%, -0%);
+    -ms-transform: translate(0%, -0%);
+    display: block;
+  }
+}
