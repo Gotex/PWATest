@@ -1,6 +1,6 @@
 const MINIGOLF_COURSE = {
   HOLECOUNT: 18,
-  PAR:[]
+  PAR:[2,2,3,3,2,3,3,3,3,2,2,2,3,2,4,3,3,2]
 };
 
 var createMinigolf = function (){

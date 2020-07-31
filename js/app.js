@@ -6,7 +6,6 @@ const MODES = {
 Object.freeze(MODES);
 
 var scorecardData = undefined;
-var modal = undefined;
 
 const SESSION_STORAGE_KEY_SCORECARD_DATA = "WagingScorecard";
 var saveToSessionStorage = function (){
@@ -169,7 +168,7 @@ var showRanking = function (){
   var rankingStr = '';
   var scores = scorecardData.getPlayerScoresSorted();
 
-  
+  var modal = document.getElementById("myModal");
 
   if(modal){
     var contentDiv = document.getElementById("ranking-content");
@@ -279,31 +278,48 @@ var newRound = function (){
   window.location.replace("../index.html");
 };
 
-var setupModal = function (){
-  //modals = document.getElementsByClassName("modal");
-  //if(!modals || modals.length <= 0){
-  //  return;
-  //}
+var showRules = function (){
+  var modal = document.getElementById("modalRules");
+  if(!modal){
+    return;
+  }
 
-  modal = document.getElementById("myModal");
+  modal.style.display = "block";
+};
+
+var setupRankingModal = function (){
+  var modal = document.getElementById("myModal");
+  setupModal(modal);
+};
+var setupRulesModal = function(){
+  var modal = document.getElementById("modalRules");
+  setupModal(modal);
+}
+
+var setupModal = function (modal){
   if (!modal){
     return;
   }
 
-  var span = document.getElementsByClassName("close");
-  if(!span || span.length <= 0){
-    return;
+  var span = modal.getElementsByClassName("close");
+  if(span && span.length > 0){
+    span[0].onclick = function() {
+      //this.parentNode.parentNode.parentNode.style.display = "none";
+      modal.style.display = "none";
+    };
   }
-  
-  span[0].onclick = function() {
-    modal.style.display = "none";
-  };
-  
-  window.onclick = function(event) {
+
+  window.addEventListener("click", function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  };
+  });  
+}
+
+
+var setupModals = function (){
+  setupRankingModal();
+  setupRulesModal();
 };
 
-window.addEventListener("load", setupModal);
+window.addEventListener("load", setupModals);

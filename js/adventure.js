@@ -1,6 +1,6 @@
 const ADVENTURE_COURSE = {
   HOLECOUNT: 18,
-  PAR:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+  PAR:[3,3,3,3,3,2,3,4,3,3,4,3,4,3,3,3,3,4]
 };
 
 var createAdventure = function (){
