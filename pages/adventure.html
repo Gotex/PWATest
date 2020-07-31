@@ -40,7 +40,7 @@
           </div>
           <div class="col-3 golfButton">
             <img src="../img/golf-ball.png">
-            <button id="btnNewRound" onclick="newRound()">Neue Runde</button>
+            <button id="btnNewRound" onclick="showRules()">Regeln anzeigen</button>
           </div>
       </div>
 
@@ -56,6 +56,42 @@
           <footer class="modal-footer">
             <button id="btnFinishRound" onclick="newRound()">Runde beenden</button>
           </footer>
+        </div>
+      </div>
+
+      <div id="modalRules" class="modal">
+        <div class="modal-content">
+          <header class="modal-header">
+            <span class="close">&times;</span>
+            <h1>Regelwerk Adventuregolf</h1>
+          </header>
+          <div id="rules-content" class="modal-rules">
+            <p>1. Die Spielgruppen (Flights) können aus 1 bis 4 Spielern bestehen.</p>
+            <p>2. Jeder Spieler erhält einen anders gekennzeichneten Ball (Unterscheidung durch Farbe, Nummer oder Werbelogo)</p>  
+            <p>3. Die Spieler schlagen nacheinander am Abschlag ab, das bedeutet, die Spielbahn wird erst dann betreten, wenn alle ihren Ball gespielt haben</p>  
+            <p>4. Die Gruppe (Flights) darf das Spiel auf der Bahn erst beginnen, wenn eine vorausspielende Gruppe die Bahn verlassen hat. Drängeln und Überholen ist nicht gestattet.</p>  
+            <p>5. Der Spieler, dessen Ball am kürzesten vom Loch entfernt ist, muss als nächstes wieder seinen Ball spielen. Also immer der Ball, der noch den kürzesten Weg zum Loch hat, muss zuerst gespielt werden.</p>  
+            <p>6. Landet der Ball im Wasserhindernis oder im Kies, so wird er wieder von Hand auf der nächstliegenden Stelle der Spielbahn eingesetzt. Der Spieler erhält einen zusätzlichen Schlag als Strafe.</p>  
+            <p>7. Landet der Ball im Sandbunker, so kann der Spieler versuchen diesen wieder auf die Spielbahn zu spielen oder er wird wieder von Hand auf der nächstliegenden Stelle der Spielbahn eingesetzt. Der Spieler erhält somit einen zusätzlichen Schlag als Strafe. Der Sandbunker ist nach dem Verlassen wieder eben zu rechen.</p>  
+            <p>8. Landet der Ball im Rough (hoher Rasen), so kann der Spieler versuchen diesen wieder auf die Spielbahn zu spielen oder er wird wieder von Hand auf der nächstliegenden Stelle der Spielbahn eingesetzt. Der Spieler erhält somit einen zusätzlichen Schlag als Strafe.</p>  
+            <p>9. Die Spielbahn ist beendet, wenn der Ball des Spielers eingelocht ist.</p>  
+            <p>10. Nach 8 Schlägen auf einer Bahn muss der Spieler die Bahn aufgeben. Für diesen Spieler wird die Bahn dann mit I0 Schlägen gewertet.</p>  
+            <p>11. Gibt ein Spieler eine Bahn unversucht schon vorher auf, so erhält er zusätzlich 2 Strafschläge und wird mit einer 12 gewertet.</p>  
+            <p>12. Das Ergebnis der Schläge aller Bahnen zusammen ergibt das Endergebnis den sogenannten Score. Dies nennt man auch Zählspiel.</p>
+            <br>
+            <p>KURZSPIELREGEL<br>
+              (Auszug aus den Wettkampfregeln des DMS.)</p>
+            <p>Für jede Bahn (Piste 1-18) dürfen höchstens 6 Schlag aufgewendet werden. Ist der Ball dann noch nicht eingelocht, werden einschließlich eines Strafpunktes 7 Punkte notiert.</p>
+            <p>Vom Abschlag müssen entweder die Endkreise erreicht (Piste 1 und 2) oder die Hindernisse überwunden werden. Gelingt das nicht, ist der Abschlag zu wiederholen.</p>
+            <p>Bei Piste 6 gilt es den Graben zu überspringen und bei Piste 7 muss der Ball den Hügel zwischen den Begrenzungen passieren. Die Steigung bei Piste 18 ist vom Anschlag zu überwinden.</p>
+            <p>Der Hilfsabschlag hinter den Hindernissen ist zu benutzen, wenn der Ball zu dicht am Hindernis liegt bzw. bei Piste 15 auf dem Plateau liegen bleibt.Bei Piste 7 kann der Ball ebenfalls 
+              nach Überwindung des Hindernisses auf die Kreismarkierung gelegt werden, wenn er vom Ruhepunkt aus nichtgespielt werden kann.</p>
+            <br>
+            <p>Der DMS (Deutscher Minigolf-Sportverband) trägt Deutsche Meisterschaften aus und ist über den DBV (Deutscher Bahnengolfverband) dem Deutschen Sportbund angeschlossen.</p>
+
+          </div>
+          <!--<footer class="modal-footer">
+          </footer>-->
         </div>
       </div>
 

@@ -40,7 +40,7 @@
           </div>
           <div class="col-3 golfButton">
             <img src="../img/golf-ball.png">
-            <button id="btnNewRound" onclick="newRound()">Neue Runde</button>
+            <button id="btnNewRound" onclick="showRules()">Regeln anzeigen</button>
           </div>
       </div>
 
@@ -56,6 +56,20 @@
           <footer class="modal-footer">
             <button id="btnFinishRound" onclick="newRound()">Runde beenden</button>
           </footer>
+        </div>
+      </div>
+
+      <div id="modalRules" class="modal">
+        <div class="modal-content">
+          <header class="modal-header">
+            <span class="close">&times;</span>
+            <h1>Regelwerk Minigolf</h1>
+          </header>
+          <div id="rules-content" class="modal-rules">
+              <p>Regeln folgen...</p>
+          </div>
+          <!--<footer class="modal-footer">
+          </footer>-->
         </div>
       </div>
       
