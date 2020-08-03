@@ -331,11 +331,17 @@ button#btnFinishRound{
   
   transform: translate(-50%, -0%);
   -ms-transform: translate(-50%, -0%);
+  display: block;
+
+  height: 300px;
 }
 
 #logo-main img{
-  height:100%;
-  width:100%;
+  height:auto;
+  width:auto;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
 }
 
 @media only screen and (max-height: 599px){
@@ -351,55 +357,34 @@ button#btnFinishRound{
 @media only screen and (min-height: 600px){
   #logo-main{
     display: block;
-  }
-
-  #logo-main img{
-    height:50%;
-    width:50%;
-    transform: translate(45%, -0%);
-    -ms-transform: translate(45%, -0%);
-    display: block;
+    height: 100px;
   }
 }
 
-@media only screen and (min-height: 650px){
+@media only screen and (min-height: 700px){
   #logo-main{
     display: block;
-  }
-
-  #logo-main img{
-    height:60%;
-    width:60%;
-    transform: translate(30%, -0%);
-    -ms-transform: translate(30%, -0%);
-    display: block;
-  }
-}
-
-@media only screen and (min-height: 710px){
-  #logo-main{
-    display: block;
-  }
-
-  #logo-main img{
-    height:80%;
-    width:80%;
-    transform: translate(12%, -0%);
-    -ms-transform: translate(12%, -0%);
-    display: block;
+    height: 150px;
   }
 }
 
 @media only screen and (min-height: 800px){
   #logo-main{
     display: block;
+    height: 200px;
   }
+}
 
-  #logo-main img{
-    height:100%;
-    width:100%;
-    transform: translate(0%, -0%);
-    -ms-transform: translate(0%, -0%);
+@media only screen and (min-height: 900px){
+  #logo-main{
     display: block;
+    height: 250px;
+  }
+}
+
+@media only screen and (min-height: 1000px){
+  #logo-main{
+    display: block;
+    height: 300px;
   }
 }
