@@ -1,4 +1,4 @@
-const CACHE_NAME = 'static-cache-v20200731-1';
+const CACHE_NAME = 'static-cache-v20200803';
 const FILES_TO_CACHE = [
   './',
   'index.html',
@@ -15,6 +15,7 @@ const FILES_TO_CACHE = [
   'img/start/adventuregolf.jpg',
   'img/start/minigolf.jpg',
   'img/start/background.jpg',
+  'img/start/logo-hq.png',
   'sw.js'
 ];
 
